@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+</head>
+
+<style>
+    * {
+        font-family: poppins;
+    }
+</style>
+<body>
+    
+    <input type="email" name="email" id="user-email"> <br>
+    <input type="password" name="password" id="user-password"> <br> 
+    <p id="message"></p>
+
+    <button onclick="signUp()">Sign Up</button>
+    <button onclick="signIn()">Sign In</button>
+    
+    <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-auth-compat.js"></script>
+
+
+<script type="module">
+const firebaseConfig = {
+  apiKey: "AIzaSyAHgl-HhXHIYiNw9MM4nqGRt8r6EoNWG14",
+  authDomain: "crud-application-f14c3.firebaseapp.com",
+  projectId: "crud-application-f14c3",
+  storageBucket: "crud-application-f14c3.appspot.com",
+  messagingSenderId: "719712968233",
+  appId: "1:719712968233:web:ec847b979ce9765a2a0638",
+  measurementId: "G-RRESR9TH1V"
+};
+
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+
+
+    <script src="app.js"></script>
+</body>
+</html>

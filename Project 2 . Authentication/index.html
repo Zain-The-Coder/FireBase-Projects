@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="email" name="email" id="user-email"> <br> <br>
+    <input type="password" name="password" id="user-password"> <br> <br>
+    <p id="errorfounder"></p>
+    <button onclick="signUp()">Sign Up</button>
+    <button onclick="singIn()">Sign In</button>
+    <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-auth-compat.js"></script>
+
+    <script type="module">
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyDN926f8AEgCbhRmK-BQDfEmE_rOIKOhiw",
+    authDomain: "authentication-testing-e69da.firebaseapp.com",
+    projectId: "authentication-testing-e69da",
+    storageBucket: "authentication-testing-e69da.firebasestorage.app",
+    messagingSenderId: "664067578713",
+    appId: "1:664067578713:web:85c6beaefe87ec36ca4a48",
+    measurementId: "G-KWD5XRCCLC"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+    <script src="app.js">
+
+    </script>
+</body>
+</html>
