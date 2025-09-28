@@ -1,4 +1,3 @@
-const { useId } = require("react");
 
 let userEmail = document.getElementById("user-email");
 let userPassword = document.getElementById("user-password");
@@ -12,14 +11,17 @@ let user = document.getElementById("username");
 const db = firebase.firestore();
 
 function signUp () {
+  spiner.style.visibility = "visible" ;
     firebase.auth().createUserWithEmailAndPassword(userEmail.value, userPassword.value)
   .then((userCredential) => { 
     var user = userCredential.user;
+    spiner.style.visibility = "hidden" ;
     message.innerHTML = "Login Successfully !" ;
     message.style.color = "green" ;
     goToHome()
   })
   .catch((error) => {
+    spiner.style.visibility = "hidden" ;
     var errorCode = error.code;
     var errorMessage = error.message;
     let errorMsg = String(errorMessage).slice(9) ;
@@ -32,8 +34,10 @@ function signUp () {
 
 
 function signIn () {
+    spiner.style.visibility = "visible" ;
     firebase.auth().signInWithEmailAndPassword(userEmail.value, userPassword.value)
   .then((userCredential) => {
+    spiner.style.visibility = "hidden" ;
     var user = userCredential.user;
     localStorage.setItem("userName" , userName.value)  ;  
     message.innerHTML = "Sign In Successfully !" ;
@@ -42,6 +46,7 @@ function signIn () {
     goToHome() ;
 })
   .catch((error) => {
+    spiner.style.visibility = "hidden" ;
     var errorCode = error.code;
     var errorMessage = error.message;
     console.log(errorCode) ;
@@ -67,38 +72,37 @@ function signOut () {
 
 
 }
-function saverTask () {
-db.collection("users").add({
-    born: 1815  
-})
-.then((docRef) => {
-    console.log("Document written with ID: ", docRef.id);
-})
-.catch((error) => {
-    console.error("Error adding document: ", error);
-});
+
+function saverTask() {
+  spiner.style.visibility = "visible" ;
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      db.collection("tasks").add({
+        UserName : localStorage.getItem("userName") ,
+        Task: taskTaker.value,
+        Uid: user.uid
+      })
+      .then((docRef) => {
+        console.log("Task saved:", docRef.id);
+        spiner.style.visibility = "hidden" ;
+
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+        spiner.style.visibility = "hidden" ;
+
+      });
+    }
+  });
 }
+
+
 // let unorderedList = div.firstElementChild ;
 // let liEl = document.createElement("li");
 // unorderedList.appendChild(liEl);
 // liEl.textContent = taskTaker.value;
 
-function saverTask () {
-  spiner.style.visibility = "visible" ;
-  db.collection("test").get()
-  .then(snapshot => {
-    console.log("Firestore Connected ✅");
-    spiner.style.visibility = "hidden" ;
 
-  })
-  .catch(err => {
-    console.error("Firestore Error ❌", err);
-  })
-  .finally(() => {
-    spiner.style.visibility =  "hidden"
-  })
-  
-}
 
 function refresh () {
   user.innerHTML = localStorage.getItem("userName");

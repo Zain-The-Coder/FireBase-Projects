@@ -9,13 +9,18 @@
 </head>
 <body>
 
-
-    Enter Your Name : <input type="text" name="text" id="user-name" placeholder="user name...."> <br>
-    Enter Your Email : <input type="email" name="email" id="user-email" placeholder="user email...."> <br>
-    Enter Your Password<input type="password" name="password" id="user-password" placeholder="user password...."> <br>
-    <p id="message"></p>
+    <h1 style="text-align: center;">WELCOME TO CURD APPLICATION</h1>
+    <div class="form">
+    <span>Enter Your Name : </span> <input type="text" name="text" id="user-name" placeholder="user name...."> <br>
+    <span>Enter Your Email : </span> <input type="email" name="email" id="user-email" placeholder="user email...."> <br>
+    <span>Enter Your Password : </span> <input type="password" name="password" id="user-password" placeholder="user password...."> <br>
+    </div>
+    <p id="message" style="text-align: center;"></p>
+    <div id="loader"></div>
+    <div class="buttons">
     <button onclick="signUp()">Sign Up</button>
     <button onclick="signIn()">Sign In</button>
+    </div>
     
 
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-app-compat.js"></script>
