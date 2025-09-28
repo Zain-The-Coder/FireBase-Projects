@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 
-    <input type="email" name="email" id="user-email"> <br>
-    <input type="password" name="password" id="user-password"> <br>
+    Enter Your Name : <input type="text" name="text" id="user-name" placeholder="user name...."> <br>
+    Enter Your Email : <input type="email" name="email" id="user-email" placeholder="user email...."> <br>
+    Enter Your Password<input type="password" name="password" id="user-password" placeholder="user password...."> <br>
     <p id="message"></p>
-    <button id="sign-up">Sign Up</button>
-    <button id="sign-in">Sign In</button>
+    <button onclick="signUp()">Sign Up</button>
+    <button onclick="signIn()">Sign In</button>
     
 
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-app-compat.js"></script>

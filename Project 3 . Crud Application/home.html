@@ -4,13 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
-    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
+</head>
+<body onload="refresh()">
+    
+<div id="header">
     <h1>Crud Application</h1>
+    <h3>User Name : </h3><p id="username"></p>
+</div>
     <p id="messanger"></p>
-    <button id="sign-out">Sign Out</button>
+
+    <input type="text" name="text" id="task-taker" placeholder="Enter Your Daily Task...">
+    <div id="loader"></div>
+    <button onclick="saverTask()">Save Task</button>
+
+    <div id="container">
+      <ul id="task-list">
+
+      </ul>
+    </div>
+
+
+    <br>
+    <button onclick="signOut()">Sign Out</button>
+
+
 
 
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-app-compat.js"></script>
@@ -18,7 +38,7 @@
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-auth-compat.js"></script>
 
 
-    <script type="module">
+    <script>
 
      const firebaseConfig = {
     apiKey: "AIzaSyBwUEoOVQJs5rxMNkbVrQxN2GdMxj88i-4",
@@ -29,8 +49,8 @@
     appId: "1:339344403861:web:0fe5d2ca9273b5ee7dda9c",
     measurementId: "G-BPW7F0TN5Y"
   };
-
   firebase.initializeApp(firebaseConfig);
+  </script>
     <script src="app.js"></script>
 </body>
 </html>
