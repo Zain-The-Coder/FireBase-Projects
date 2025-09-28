@@ -8,6 +8,7 @@ let div = document.getElementById("container");
 let userName = document.getElementById("user-name");
 let spiner = document.getElementById("loader");
 let user = document.getElementById("username");
+let ul = document.getElementById("task-list")
 const db = firebase.firestore();
 
 function signUp () {
@@ -84,6 +85,10 @@ function saverTask() {
       })
       .then((docRef) => {
         console.log("Task saved:", docRef.id);
+  let unorderedList = div.firstElementChild ;
+  let liEl = document.createElement("li");
+  unorderedList.appendChild(liEl);
+  liEl.textContent = taskTaker.value;
         spiner.style.visibility = "hidden" ;
 
       })
@@ -97,13 +102,17 @@ function saverTask() {
 }
 
 
-// let unorderedList = div.firstElementChild ;
-// let liEl = document.createElement("li");
-// unorderedList.appendChild(liEl);
-// liEl.textContent = taskTaker.value;
-
-
 
 function refresh () {
-  user.innerHTML = localStorage.getItem("userName");
+  firebase.auth().onAuthStateChanged ((user) => {
+    if(user) {
+        user.innerHTML = localStorage.getItem("userName");
+        db.collection("tasks").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+        console.log(doc.id , doc.data());
+        ul.textContent = doc.data()
+      });
+  });
+    }
+  })
 }
