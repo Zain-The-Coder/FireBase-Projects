@@ -30,8 +30,9 @@ function signUp () {
 
 function signIn () {
   localStorage.setItem("userName" , userName.value);
+  //idTaker() ;
   spiner.style.visibility = "visible" ;
-  firebase.auth().signInWithEmailAndPassword(userEmail.value, userPassword.value)
+  firebase.auth().signInWithEmailAndPassword(userEmail.value , userPassword.value)
   .then((userCredential) => {
    // let user = userCredential.user;
     console.log("yes, user found");
@@ -44,7 +45,8 @@ function signIn () {
     let errorMessage = error.message;
     spiner.style.visibility = "hidden" ;
     let errorOccured = String(errorMessage).slice(9)
-    message.innerHTML = errorOccured;  });
+    message.innerHTML = errorOccured;
+    });
 }
 
 function signOut () {
@@ -53,7 +55,7 @@ firebase.auth().signOut()
   .then(() => {
     gotoindex() ;
     localStorage.removeItem("userName");
-    spiner.style.visibility = "hidden" ;
+    spiner.style.visibility = "hidden" ;  
     return firebase.auth() ;
 }).catch((error) => {
   console.log(error);
@@ -61,13 +63,11 @@ firebase.auth().signOut()
 }
 
 function gotoindex () {
-  window.location.href = "./index.html"
+  window.location.href = "./index.html" ;
 }
 function gotoHome () {
   window.location.href = "./home.html" ;
 }
-
-
 
 let currentUser = null ;
 
@@ -79,20 +79,21 @@ firebase.auth().onAuthStateChanged((user) => {
     currentUser = null ;
     console.log("No User Found !") ;
   }
-})
-
+});
 function refresh () {
     user.innerHTML = localStorage.getItem("userName");
-    db.collection("tasks").get()
+    ulEl.innerHTML = "" ;
+    db.collection("tasks").where("Uid" , "==" , localStorage.getItem("userId")).get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           console.log(doc.id , doc.data());
           let liEl = document.createElement("li");
           liEl.textContent = doc.data().Task;
           ulEl.appendChild(liEl);
+      });
     });
-});
 }
+
 function saverTask () {
     if(currentUser) {
 db.collection("tasks").add({
@@ -101,6 +102,7 @@ db.collection("tasks").add({
   Name : localStorage.getItem("userName"),
 })
 .then((docRef) => {
+  localStorage.setItem("userId" , currentUser.uid);
     console.log("Document written with ID: ", docRef.id);
     let liEl = document.createElement("li");
     liEl.textContent = task.value ,
@@ -114,3 +116,4 @@ db.collection("tasks").add({
    alert("Please sign in first to add a task.");
  }
 }
+
