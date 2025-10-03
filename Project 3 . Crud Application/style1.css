@@ -1,0 +1,126 @@
+body {
+    font-family: poppins;
+    background: linear-gradient(to right, #121212, #0d1117, #101820);       
+}
+
+@keyframes come {
+  0% {
+    opacity: 0;
+  } 20% {
+    opacity: 2;
+  } 40% {
+    opacity: 4;
+  } 60% {
+    opacity: 6;
+  } 80% {
+    opacity: 8;
+  } 100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hello {
+  0% {opacity: 1;} 
+  100%{opacity: 0;}
+}
+#message {
+  animation: hello 2s ease;
+}
+ @keyframes bounce{
+    0% {
+      transform: translateY(-45px);
+      animation-timing-function: ease-in;
+      opacity: 1;
+    }
+    24% {
+      opacity: 1;
+    }
+    40% {
+      transform: translateY(-24px);
+      animation-timing-function: ease-in;
+    }
+    65% {
+      transform: translateY(-12px);
+      animation-timing-function: ease-in;
+    }
+    82% {
+      transform: translateY(-6px);
+      animation-timing-function: ease-in;
+    }
+    93% {
+      transform: translateY(-4px);
+      animation-timing-function: ease-in;
+    }
+    25%,
+    55%,
+    75%,
+    87% {
+      transform: translateY(0px);
+      animation-timing-function: ease-out;
+    }
+    100% {
+      transform: translateY(0px);
+      animation-timing-function: ease-out;
+      opacity: 1;
+    }
+  }
+
+h1 {
+    text-transform: uppercase; 
+    font-weight: bolder;
+    color: antiquewhite;
+    font-family: poppins;
+    margin-top: 40px;
+    animation: bounce 1s ease;
+    text-align: center;
+}
+#header {
+    display: flex;
+    border-bottom: 1px solid white;
+    color: white;
+    width: 17%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+#head {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid white;
+    align-items: center;
+    width: 100%;
+
+}
+
+input {
+    background-color: #121212;
+    width: 40%;
+    height: 33px;
+    border-radius: 10px;
+    font-family: poppins;
+    text-transform: capitalize;
+    color: white;
+}
+#taken-div{
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 80%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+    gap: 10px;
+}
+button {
+    width: 130px;
+    padding:5px;
+    color: wheat;
+    background-color: black;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+*{
+    color: white;
+}

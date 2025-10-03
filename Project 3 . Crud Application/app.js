@@ -11,6 +11,7 @@ const db = firebase.firestore();
 
 function signUp () {
   localStorage.setItem("userName" , userName.value);
+  localStorage.setItem("userId" , currentUser.uid)
   spiner.style.visibility = "visible" ;
   firebase.auth().createUserWithEmailAndPassword(userEmail.value, userPassword.value)
   .then((userCredential) => {
@@ -30,14 +31,14 @@ function signUp () {
 
 function signIn () {
   localStorage.setItem("userName" , userName.value);
-  //idTaker() ;
   spiner.style.visibility = "visible" ;
   firebase.auth().signInWithEmailAndPassword(userEmail.value , userPassword.value)
   .then((userCredential) => {
-   // let user = userCredential.user;
+   let user = userCredential.user;
     console.log("yes, user found");
     spiner.style.visibility = "hidden" ;
     gotoHome() ;
+    localStorage.setItem("userId" , currentUser.uid);
     return firebase.auth() ;
   })
   .catch((error) => {
@@ -55,6 +56,7 @@ firebase.auth().signOut()
   .then(() => {
     gotoindex() ;
     localStorage.removeItem("userName");
+    localStorage.removeItem("userId");
     spiner.style.visibility = "hidden" ;  
     return firebase.auth() ;
 }).catch((error) => {
@@ -75,45 +77,50 @@ firebase.auth().onAuthStateChanged((user) => {
   if(user) {
     currentUser = user ;
     console.log("user signed in " , user.uid) ;
+    localStorage.setItem("userId" , user.uid);
   } else {
     currentUser = null ;
     console.log("No User Found !") ;
   }
 });
-function refresh () {
-    user.innerHTML = localStorage.getItem("userName");
-    ulEl.innerHTML = "" ;
-    db.collection("tasks").where("Uid" , "==" , localStorage.getItem("userId")).get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          console.log(doc.id , doc.data());
-          let liEl = document.createElement("li");
-          liEl.textContent = doc.data().Task;
-          ulEl.appendChild(liEl);
-      });
-    });
-}
 
-function saverTask () {
-    if(currentUser) {
+function saverTask() {
 db.collection("tasks").add({
-  Task : task.value ,
-  Uid : currentUser.uid ,
-  Name : localStorage.getItem("userName"),
+    userName : localStorage.getItem("userName"),
+    userUid : currentUser.uid ,
+    userTask : task.value ,
 })
 .then((docRef) => {
-  localStorage.setItem("userId" , currentUser.uid);
     console.log("Document written with ID: ", docRef.id);
-    let liEl = document.createElement("li");
-    liEl.textContent = task.value ,
-    ulEl.appendChild(liEl);
 })
 .catch((error) => {
     console.error("Error adding document: ", error);
 });
-  } else {
-   console.error("No user is signed in");
-   alert("Please sign in first to add a task.");
- }
+}
+function refresh () {
+  db.collection("tasks")
+    .where("userUid", "==", localStorage.getItem("userId"))
+    .onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === "added") {
+          // console.log("New city: ", change.doc.data(), change.doc.id);
+          addTask(change.doc);
+        }
+        // if (change.type === "modified") {
+        //     // console.log("Modified city: ", change.doc.data());
+        //     updateTodoFromDom(change.doc);
+        // }
+        // if (change.type === "removed") {
+        //   // console.log("Removed city: ", change.doc.data());
+        //   deleteFromDom(change.doc);
+        // }
+      });
+    });
 }
 
+function addTask (parameter) {
+  let addUserTask = parameter.data().userTask;
+  let liEl = document.createElement("li");
+  liEl.textContent = addUserTask;
+  ulEl.appendChild(liEl);
+}
