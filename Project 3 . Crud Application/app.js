@@ -102,10 +102,9 @@
           if (change.type === "added") {
             addTask(change.doc);
           }
-          // if (change.type === "modified") {
-          //     // console.log("Modified city: ", change.doc.data());
-          //     updateTodoFromDom(change.doc);
-          // }
+          if (change.type === "modified") {
+              editer(change.doc.id);
+          }
           if (change.type === "removed") {
             removeDom(change.doc.id);
             }
@@ -158,7 +157,8 @@
     editButton.style.width = "120px";
     editButton.style.borderRadius = "2px" ;
     editButton.style.fontFamily = "poppins";
-    editButton.setAttribute("onClick" , "edit()");
+    editButton.setAttribute("onClick" , "editer(this)");
+    editButton.setAttribute("id" , docId);
 
     let completedButton = document.createElement("button");
     completedButton.textContent = "Completed" ;
@@ -191,9 +191,34 @@ function removeDom (docId) {
       console.error("Error removing document: ", error);
   });
   }
+let taskButton = document.getElementById("main-button") ;
+let editDocId;
 
+  function editer (button) {
+      let text = button.previousSibling.previousSibling.textContent;
+      task.value = text ;
+      editDocId = button.parentNode;
+      console.log(editDocId)
+      taskButton.innerHTML = "Update Task" ;
+      taskButton.setAttribute("onClick" , "editTask()");
+      console.log(taskButton)
+      
+  }
+function editTask () {
+  db.collection("tasks")
+    .doc(editDocId)
+    .update({
+      userTask : task.value,
+    })
+    .then(() => {
+      console.log("Document successfully updated!");
 
-function edit () {
-  console.log(deleteButton)
-  //task.value = 
+      task.value = "" ;
+    })
+    .catch((error) => {
+      console.error("Error updating document: ", error);
+    });
 }
+
+
+
