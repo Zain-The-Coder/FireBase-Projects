@@ -5,9 +5,9 @@
   let user = document.getElementById("username");
   let spiner = document.getElementById("loader");
   let task = document.getElementById("task-taker");
-  let ulEl = document.getElementById("task-list")
+  let ulEl = document.getElementById("task-list");
+  let msg = document.getElementById("msg");
   const db = firebase.firestore();
-
 
   function signUp () {
     localStorage.setItem("userName" , userName.value);
@@ -81,7 +81,8 @@
   });
 
   function saverTask() {
-
+    msg.innerHTML = "Task Is Adding....." ;
+    msg.style.color = "pink" ;
   db.collection("tasks").add({
       userName : localStorage.getItem("userName"),
       userUid : localStorage.getItem("userId"),
@@ -89,12 +90,19 @@
   })
   .then((docRef) => {
       console.log("Document written with ID: ", docRef.id);
+      task.value = "" ;
+      msg.innerHTML = "Task Is Added" ;
+      msg.style.color = "green" ;
   })
   .catch((error) => {
       console.error("Error adding document: ", error);
+      msg.innerHTML = "Error Found" ;
+      msg.style.color = "red" ;      
   });
   }
   function refresh () {
+    let x = localStorage.getItem("userName");
+    user.innerHTML = x ;
     db.collection("tasks")
       .where("userUid", "==", localStorage.getItem("userId"))
       .onSnapshot((snapshot) => {
@@ -192,33 +200,37 @@ function removeDom (docId) {
   });
   }
 let taskButton = document.getElementById("main-button") ;
-let editDocId;
+let editTaskId;
 
   function editer (button) {
+      msg.innerHTML = "Task Is Updating" ;
+      msg.style.color = "pink" ;
+    editTaskId = button.id;
       let text = button.previousSibling.previousSibling.textContent;
       task.value = text ;
-      editDocId = button.parentNode;
-      console.log(editDocId)
       taskButton.innerHTML = "Update Task" ;
-      taskButton.setAttribute("onClick" , "editTask()");
-      console.log(taskButton)
-      
-  }
-function editTask () {
-  db.collection("tasks")
-    .doc(editDocId)
-    .update({
-      userTask : task.value,
-    })
-    .then(() => {
-      console.log("Document successfully updated!");
-
-      task.value = "" ;
+      taskButton.setAttribute("onClick" , "editTask(this)");      
+    }
+    function editTask (button) {
+      console.log(editTaskId)
+      db.collection("tasks")
+        .doc(editTaskId)
+        .update({
+            userTask : task.value,
+          })
+          .then(() => {
+              msg.innerHTML = "Task Updated Successfully" ;
+              msg.style.color = "green" ;
+         taskButton.innerText = "Save Task" ;
+         taskButton.setAttribute("onClick" , "saverTask()");
     })
     .catch((error) => {
       console.error("Error updating document: ", error);
-    });
+      msg.innerHTML = "Error Found !" ;
+      msg.style.color = "red" ;
+   });
 }
 
-
-
+function editFromDom () {
+  
+}

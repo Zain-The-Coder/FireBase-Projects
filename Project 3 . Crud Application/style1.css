@@ -120,7 +120,6 @@ button {
     cursor: pointer;
     border-radius: 15px;
 }
-
-*{
+* , #username{
     color: white;
 }
