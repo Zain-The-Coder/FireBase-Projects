@@ -10,6 +10,16 @@
   const db = firebase.firestore();
 
   function signUp () {
+        if(!userName.value || !userEmail.value || !userPassword.value) {
+    message.innerHTML = "Please Fill The Above All Requirements !" ;
+    return ;
+  }
+
+  let x = userName.value ;
+  if(x.length > 6) {
+    message.innerHTML = "Please Use The User Name Whose Length Is 6 Characters Or Small" ;
+    return ;
+  }
     localStorage.setItem("userName" , userName.value);
     spiner.style.visibility = "visible" ;
     firebase.auth().createUserWithEmailAndPassword(userEmail.value, userPassword.value)
@@ -17,6 +27,7 @@
       let user = userCredential.user;
       spiner.style.visibility = "hidden" ;
       console.log("user added");
+      message.innerHTML = "Now You Click On Sign In Button , And Verify Your Email To Reach In Application" ;
     })
     .catch((error) => {
       //let errorCode = error.code;
@@ -28,6 +39,16 @@
   }
 
   function signIn () {
+        if(!userName.value || !userEmail.value || !userPassword.value) {
+    message.innerHTML = "Please Fill The Above All Requirements !" ;
+    return ;
+  }
+
+  let x = userName.value ;
+  if(x.length > 6) {
+    message.innerHTML = "Please Use The User Name Whose Length Is 6 Characters Or Small" ;
+    return ;
+  }
     localStorage.setItem("userName" , userName.value);
     spiner.style.visibility = "visible" ;
     firebase.auth().signInWithEmailAndPassword(userEmail.value , userPassword.value)
@@ -46,7 +67,6 @@
       message.innerHTML = errorOccured;
       });
   }
-
   function signOut () {
     spiner.style.visibility = "visible" ;
   firebase.auth().signOut()
@@ -81,6 +101,10 @@
   });
 
   function saverTask() {
+      if(!task.value) {
+      msg.innerHTML = "Please Enter Task" ;
+      return ;
+    }
     msg.innerHTML = "Task Is Adding....." ;
     msg.style.color = "pink" ;
   db.collection("tasks").add({
@@ -111,7 +135,7 @@
             addTask(change.doc);
           }
           if (change.type === "modified") {
-              editer(change.doc.id);
+              editFromDom(change.doc.id);
           }
           if (change.type === "removed") {
             removeDom(change.doc.id);
@@ -130,6 +154,8 @@
 
     let container = document.createElement("div");
     container.style.margin = "auto" ;
+    container.setAttribute("class" , "container");
+    console.log(container)
     ulEl.appendChild(container);
     container.setAttribute("id" , docId);
 
@@ -137,21 +163,20 @@
     container.appendChild(heading);
     container.appendChild(diver);
     diver.appendChild(liEl);
+    liEl.setAttribute("class" , "liEl")
       diver.style.border = "3px solid black";
       diver.style.width = "70%"
       diver.style.margin = "12px 0px";
       diver.style.padding = "10px";
       diver.style.listStyleType = "none";
       diver.style.borderRadius = "10px";
-      diver.style.height = "60px";
+      //diver.style.height = "60px";
 
     let deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete Task" ;
     deleteButton.style.backgroundColor = "red" ;
     deleteButton.style.color = "white" ;
     deleteButton.style.fontWeight = "bold" ;
-    deleteButton.style.width = "120px";
-    deleteButton.style.borderRadius = "2px" ;
     deleteButton.style.fontFamily = "poppins" ;
     deleteButton.setAttribute("id" , docId);
     deleteButton.setAttribute("onClick" , "deleter(this)");
@@ -162,8 +187,6 @@
     editButton.style.backgroundColor = "blue" ;
     editButton.style.color = "white" ;
     editButton.style.fontWeight = "bold" ;
-    editButton.style.width = "120px";
-    editButton.style.borderRadius = "2px" ;
     editButton.style.fontFamily = "poppins";
     editButton.setAttribute("onClick" , "editer(this)");
     editButton.setAttribute("id" , docId);
@@ -173,13 +196,31 @@
     completedButton.style.backgroundColor = "green" ;
     completedButton.style.color = "white" ;
     completedButton.style.fontWeight = "bold" ;
-    completedButton.style.width = "120px";
-    completedButton.style.borderRadius = "2px" ;
     completedButton.style.fontFamily = "poppins";
+
+    completedButton.addEventListener("click" , () => {
+      heading.innerHTML = "Completed Task" ;
+      heading.color = "yellow" ;
+      diver.style.backgroundColor = "green" ;
+      let x = completedButton.previousSibling;
+      diver.removeChild(x);
+      diver.removeChild(completedButton);
+    })
 
     diver.appendChild(deleteButton)
     diver.appendChild(editButton)
     diver.appendChild(completedButton);
+
+    editButton.setAttribute("class" , "add");
+    deleteButton.setAttribute("class" , "delete");
+    completedButton.setAttribute("class" , "completed");
+    diver.setAttribute("class" , "diver");
+console.log(editButton)
+console.log(deleteButton)
+console.log(completedButton)
+console.log(liEl)
+
+
 }
 
 function removeDom (docId) {
@@ -208,8 +249,9 @@ let editTaskId;
     editTaskId = button.id;
       let text = button.previousSibling.previousSibling.textContent;
       task.value = text ;
-      taskButton.innerHTML = "Update Task" ;
-      taskButton.setAttribute("onClick" , "editTask(this)");      
+      taskButton.textContent = "Update Task";
+      taskButton.setAttribute("onClick" , "editTask(this)");    
+      console.log(button)  
     }
     function editTask (button) {
       console.log(editTaskId)
@@ -220,6 +262,7 @@ let editTaskId;
           })
           .then(() => {
               msg.innerHTML = "Task Updated Successfully" ;
+              task.value = "" ;
               msg.style.color = "green" ;
          taskButton.innerText = "Save Task" ;
          taskButton.setAttribute("onClick" , "saverTask()");
@@ -231,6 +274,23 @@ let editTaskId;
    });
 }
 
-function editFromDom () {
-  
+function editFromDom (docId) {
+  let container = document.getElementById(docId);
+  if(container) {
+    let li = container.querySelector("li");
+    db.collection("tasks").doc(docId)
+  .get()
+  .then((doc) => {
+    if (doc.exists) {
+        console.log("Document data:", doc.data());
+        li.textContent = doc.data().userTask;
+    } else {
+        console.log("No such document!");
+    }
+}).catch((error) => {
+    console.log("Error getting document:", error);
+});
 }
+}
+
+

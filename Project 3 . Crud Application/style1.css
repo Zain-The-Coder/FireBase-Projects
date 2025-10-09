@@ -78,7 +78,7 @@ h1 {
     display: flex;
     border-bottom: 1px solid white;
     color: white;
-    width: 17%;
+    width: 27%;
     align-items: center;
     justify-content: space-evenly;
 }
@@ -122,4 +122,292 @@ button {
 }
 * , #username{
     color: white;
+}
+#main-button {
+  background-color: #101820ba;
+    border-radius: 4px;
+    width: 40%;
+    height: 35px;
+    border-radius: 10px;
+    color: darkcyan;
+    font-weight: bolder;
+    font-family: poppins;
+}
+ .add , .delete , .completed {
+  margin-left: 5px;
+  margin-right: 5px;
+ }
+#main-button:hover {
+  background-color: black;
+  color: white;
+}
+
+#out {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+      color: #fff;
+      background-color: #000;
+
+  }
+  #out:hover {
+ background: #1e4ed8;
+      transform: scale(1.05);
+      box-shadow: 0px 0px 18px rgba(37,99,235,0.9);
+    }
+
+/* RESPONSIVE AREA   */
+
+
+@media (max-width: 800px) {
+  h1 {
+    font-size: 20px;
+  }
+  #header {
+    font-size: 10.8px;
+    width: 35%;
+  }
+  #task-taker{ 
+    width: 67%;
+    height: 26px;
+    font-size: 12px;
+  }
+  #msg {
+    font-size: 12px;
+  }
+ .add , .delete , .completed {
+    height: 24px;
+    font-size: 12.3px;
+    width: 87px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    border-color: black;
+  }
+  .diver {
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    height: fit-content;
+    gap: 5px;
+  }
+  .container {
+    padding: 5px;
+    width: 99%;
+  }
+  .liEl {
+    font-size: 12.4px;
+    font-weight: 500;
+  }
+}
+
+
+@media (max-width: 625px) {
+  h1 {
+    font-size: 20px;
+  }
+  #header {
+    font-size: 10.8px;
+    width: 35%;
+  }
+  #task-taker{ 
+    width: 76%;
+    height: 26px;
+    font-size: 11.6px;
+  }
+  #msg {
+    font-size: 11px;
+  }
+ .add , .delete , .completed {
+    height: 21.2px;
+    font-size: 11px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .diver {
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    height: fit-content;
+    gap: 5px;
+  }
+  .container {
+    padding: 5px;
+    width: 99%;
+  }
+  .liEl {
+    font-size: 11.8px;
+    font-weight: 500;
+  }
+}
+
+
+@media (max-width: 580px) {
+  h1 {
+    font-size: 18px;
+  }
+  #header {
+    font-size: 13px;
+    width: 35%;
+  }
+  #task-taker{ 
+    width: 80%;
+    height: 26px;
+    font-size: 11.4px;
+  }
+  #msg {
+    font-size: 10px;
+  }
+  .add , .delete , .completed {
+    height: 21.2px;
+    font-size: 11px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .diver {
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    height: fit-content;
+    gap: 5px;
+  }
+  .container {
+    padding: 5px;
+    width: 99%;
+  }
+  .liEl {
+    font-size: 11.6px;
+    font-weight: 500;
+  }
+}
+
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 16px;
+  }
+  #header {
+    font-size: 10px;
+    width: 35%;
+  }
+  #task-taker{ 
+    width: 90%;
+    height: 24px;
+    font-size: 11.4px;
+  }
+  #msg {
+    font-size: 9px;
+  }
+  .add , .delete , .completed {
+    height: 20px;
+    font-size: 10px;
+    width: 76px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .diver {
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    height: fit-content;
+    gap: 5px;
+  }
+  .container {
+    padding: 5px;
+    width: 99%;
+  }
+  .liEl {
+    font-size: 11.3px;
+    font-weight: 500;
+  }
+}
+
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 15px;
+  }
+  #header {
+    font-size: 9px;
+    width: 35%;
+  }
+  #task-taker{ 
+    width: 100%;
+    height: 22px;
+    font-size: 11px;
+  }
+  #msg {
+    font-size: 9px;
+  }
+  .add , .delete , .completed {
+    height: 17px;
+    font-size: 9px;
+    width: 73px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .diver {
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    height: fit-content;
+    gap: 5px;
+  }
+  .container {
+    padding: 5px;
+    width: 99%;
+  }
+  .liEl {
+    font-size: 11px;
+    font-weight: 500;
+  }
+}
+@media (max-width:340px) {
+  h1 {
+    font-size: 14px;
+  }
+  #header {
+    font-size: 8px;
+    width: 34%;
+  }
+  #task-taker{ 
+    width: 100%;
+    height: 20px;
+    font-size: 10px;
+  }
+  #msg {
+    font-size: 9px;
+  }
+  .add , .delete , .completed {
+    height: 15px;
+    font-size: 8px;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .diver {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    gap: 5px;
+  }
+  .container {
+    padding: 5px;
+  }
+  .liEl {
+    font-size: 10px;
+    font-weight: 500;
+  }
 }

@@ -14,12 +14,14 @@
 <div id="header">
     <h3>User Name : </h3><p id="username"></p>
 </div></div>
+
+
     <p id="messanger"></p>
     <div id="taken-div">
     <input type="text" name="text" id="task-taker" placeholder="Enter Your Daily Task...">
     <div id="loader"></div>
     <p id="msg"></p>
-    <button onclick="saverTask()" id="main-button ">Save Task</button>
+    <button onclick="saverTask()" id="main-button">Save Task</button>
   </div>
 
     <div id="container">
@@ -30,7 +32,7 @@
 
 
     <br>
-    <button onclick="signOut()">Sign Out</button>
+    <button onclick="signOut()" id="out">Sign Out</button>
 
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore-compat.js"></script>
