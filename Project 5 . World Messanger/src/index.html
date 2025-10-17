@@ -13,7 +13,12 @@
     <div class="mt-[40px] text-center">
         <input class="border-2 border-black w-[50%] h-[7vh] text-[15px] rounded-[18px] p-[10px] font-bold font-[poppins] focus:border-cyan-300 active:border-cyan-500" type="text" name="text" id="userName" placeholder="Enter Your Name">
         <input class="border-2 border-black w-[50%] h-[7vh] text-[15px] rounded-[18px] mt-[5px] p-[10px] font-bold font-[poppins]" type="text" name="text" id="userInput" placeholder="Enter Your Message">
-        <br><button class="border border-black mt-[4px] cursor-pointer p-[5px] rounded-[4px] font-[poppins]">Send Message</button>
+       <p></p>
+        <br><button id="submit" class="border border-black mt-[4px] cursor-pointer p-[5px] rounded-[4px] font-[poppins]">Send Message</button>
+    </div>
+
+    <div id="task-div">
+        <ul id="task-ul"></ul>
     </div>
 
 
@@ -34,5 +39,6 @@
 
   firebase.initializeApp(firebaseConfig);
 </script>
+<script src="app.js"></script>
 </body>
 </html>
