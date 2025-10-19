@@ -1,0 +1,46 @@
+#listItem {
+  background: linear-gradient(135deg, #1f1c2c, #928dab); /* gradient background */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 75%;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin: 10px auto;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#listItem:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+}
+
+#listItem p:first-child {
+  font-weight: 700;
+  font-size: 16px;
+  color: #ffd166;
+  margin-bottom: 5px;
+}
+
+#listItem p:last-child {
+  font-size: 15px;
+  color: #f8f9fa;
+  margin: 0;
+}
+
+.headEl {
+  color: #ffd166;   /* cyan color for "User Message :" */
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.nameEl {
+  color: #ffd166;   /* yellowish color for "User Name :" */
+  font-weight: 600;
+  margin-right: 6px;
+}
+#messanger {
+  font-family: poppins;
+}
