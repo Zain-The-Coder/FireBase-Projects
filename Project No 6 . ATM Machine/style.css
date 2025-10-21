@@ -1,0 +1,41 @@
+* {
+    font-family: poppins;
+    background-color: #121212;
+    color: #fff;
+}
+h1 {
+    text-align: center;
+}
+.atm-box {
+    width: 100%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+button {
+    width: fit-content;
+    height: 10vh;
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+#para {
+    font-size: 40px;
+    font-weight: bolder;
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0% {opacity: 0; text-shadow: 1px 1px 3px cyan;}
+    50%{opacity: 1; text-shadow: 3px 3px 5px cyan;}
+    100% {opacity: 0; text-shadow: 1px 1px 3px cyan;}
+}
+div {
+    border: 1px solid #fff;
+    height: 25%;
+    width: 100%;
+}
