@@ -9,28 +9,37 @@ let loader = document.getElementById("loader");
 
 
 login.addEventListener("click" , (event) => {
+     msg.innerHTML = "" ;
     loader.style.visibility = "visible" ;
     event.preventDefault();
     if(!userEmail.value || !userPassword.value || !userName.value) {
-        msg.innerHTML = "Please Fill Above Requirements !" ;
-        msg.style.fontWeight = "bold" ;
-        msg.style.color = "red" ;
-        return ;
+      msg.innerHTML = "Please Fill Above Requirements !" ;
+      msg.style.fontWeight = "bold" ;
+      msg.style.color = "red" ;
+      loader.style.visibility = "hidden" ;
+      return ;
     }   
     firebase.auth().signInWithEmailAndPassword(userEmail.value, userPassword.value)
     .then((userCredential) => {
-    loader.style.visibility = "visible" ;
+      loader.style.visibility = "hidden" ;
     let user = userCredential.user;
     msg.innerHTML = "Login Successfully !" ;
     msg.style.color = "green" ;
     msg.style.fontWeight = "bold" ;
+    gotoIndex() ;
 
   })
   .catch((error) => {
     var errorCode = error.code;
+    loader.style.visibility = "hidden" ;
     var errorMessage = error.message;
     msg.innerHTML = errorMessage.slice(9) ;
     msg.style.fontWeight = "bold" ;
     msg.style.color = "red" ;    
   });
 });
+
+
+function gotoIndex () {
+  window.location.href = "./index.html" ;
+}

@@ -20,6 +20,7 @@ signUp.addEventListener("click" , (event) => {
     msg.innerHTML = " User Added Successfully ! " ;
     msg.style.color = "green";
     msg.style.fontWeight = "bold" ;
+    gotoIndex();
   })
   .catch((error) => {
     var errorCode = error.code;
@@ -29,3 +30,8 @@ signUp.addEventListener("click" , (event) => {
     msg.style.color = "red" ;
   });
 })
+
+
+function gotoIndex () {
+  window.location.href = "./index.html" ;
+}

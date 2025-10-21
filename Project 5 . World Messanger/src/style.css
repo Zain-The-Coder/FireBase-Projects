@@ -44,3 +44,25 @@
 #messanger {
   font-family: poppins;
 }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .message-bubble {
+      animation: fadeInUp 0.4s ease-in-out;
+    }
+
+    /* Background gradient animation */
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .animated-bg {
+      background: linear-gradient(-45deg, #1e1e2f, #3b0764, #0f172a, #4c1d95);
+      background-size: 300% 300%;
+      animation: gradientMove 10s ease infinite;
+    }

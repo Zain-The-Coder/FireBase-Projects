@@ -5,26 +5,13 @@ let ulEl = document.getElementById("task-ul");
 let messanger = document.getElementById("messanger");
 const db = firebase.firestore();
 
-
-let userKaName = prompt("Enter Your User Name : ");
-
-userName.value = userKaName ;
-document.getElementById("userName").readOnly = true ;
-
-
 function message () {
-}   
-
-function message () {
-
   if(!userName.value || !userTask.value) {
         messanger.innerHTML = "Please Fill The Above Requirements !" ;
         messanger.style.color = "red" ;
         messanger.style.marginBottom = "-25px" ;
         return ;
     }
-
-
 db.collection("messages").add({
     Username : userName.value ,
     UserMessage : userTask.value , 
@@ -62,6 +49,4 @@ db.collection("messages").add({
 .catch((error) => {
     console.error("Error adding document: ", error);
 });
-
-
 }
