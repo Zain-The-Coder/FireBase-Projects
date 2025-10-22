@@ -7,23 +7,28 @@ const db = firebase.firestore();
 
 
 button.addEventListener("click" , () => {
-    if(!userMessage.value) {
-        printer.innerHTML = "Input Field Is Empty !" ;
-        printer.style.fontWeight = "bold" ;
-        printer.style.fontFamily = "poppins";
-        printer.style.color = "red" ;
-    }
-    db.collection("messages").add({
-        UserName : localStorage.getItem("userName"),
-        UserMessage : userMessage.value ,
-    })
-    .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
-    })
-    .catch((error) => {
-        console.error("Error adding document: ", error);
-    });    
+            addInDom()
+
+    // if(!userMessage.value) {
+    //     printer.innerHTML = "Input Field Is Empty !" ;
+    //     printer.style.fontWeight = "bold" ;
+    //     printer.style.fontFamily = "poppins";
+    //     printer.style.color = "red" ;
+    // }
+    // db.collection("messages").add({
+    //     UserName : localStorage.getItem("userName"),
+    //     UserMessage : userMessage.value ,
+    // })
+    // .then((docRef) => {
+    //     addInDom()
+    //     console.log("Document written with ID: ", docRef.id);
+    // })
+    // .catch((error) => {
+    //     console.error("Error adding document: ", error);
+    // });    
 });
+
+
 
 function addInDom () {
     let taskList = document.createElement("li");
@@ -41,16 +46,26 @@ function addInDom () {
 
     userMessageSec.textContent = userMessage.value;
     userNameSec.textContent = localStorage.getItem("userName");
+    deleteButton.textContent = "🗑️" ;
+    deleteButton.style.width = "80px" ;
 
-    taskList.appendChild(userMessageSec);
     taskList.appendChild(userNameSec);
+    taskList.appendChild(userMessageSec);
     taskList.appendChild(deleteButton);
 
     ulEl.appendChild(taskList);
 
     console.log(userNameSec)
-console.log(userMessageSec);
+    console.log(userMessageSec);
+    console.log(deleteButton)
 
+
+    deleteButton.addEventListener("click" , () {
+
+    })
 
 
 }
+
+
+

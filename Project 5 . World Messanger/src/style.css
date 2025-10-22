@@ -1,49 +1,59 @@
-#listItem {
-  background: linear-gradient(135deg, #1f1c2c, #928dab); /* gradient background */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  width: 75%;
-  padding: 15px 20px;
-  border-radius: 12px;
-  margin: 10px auto;
-  color: #fff;
+/* Overall Message List */
+.message-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  width: 94%;
   font-family: "Poppins", sans-serif;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(6px);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-#listItem:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+/* Each Message Card */
+.message-list li {
+  background: #1f2937;
+  color: white;
+  padding: 15px 20px;
+  border: 1px solid #4c1d95;
+  border-radius: 15px;
+  margin-bottom: 12px;
+  box-shadow: 0 0 10px rgba(123, 31, 162, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-#listItem p:first-child {
-  font-weight: 700;
-  font-size: 16px;
-  color: #ffd166;
-  margin-bottom: 5px;
+.message-list li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
 }
 
-#listItem p:last-child {
+/* User Name */
+.message-list p:nth-child(2) {
+  font-weight: bold;
+  color: #c084fc;
+  margin-top: 8px;
+  }
+
+/* User Message */
+.message-list p:nth-child(1) {
   font-size: 15px;
-  color: #f8f9fa;
-  margin: 0;
+  color: #e5e7eb;
 }
 
-.headEl {
-  color: #ffd166;   /* cyan color for "User Message :" */
-  font-weight: 600;
-  margin-right: 6px;
+/* Delete Button */
+.message-list button {
+  background: #9333ea;
+  border: none;
+  padding: 7px 12px;
+  color: white;
+  font-size: 13px;
+  border-radius: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.nameEl {
-  color: #ffd166;   /* yellowish color for "User Name :" */
-  font-weight: 600;
-  margin-right: 6px;
+.message-list button:hover {
+  background: #a855f7;
 }
-#messanger {
-  font-family: poppins;
-}
+
 
     @keyframes fadeInUp {
       0% { opacity: 0; transform: translateY(20px); }
