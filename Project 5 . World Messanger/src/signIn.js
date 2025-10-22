@@ -26,6 +26,7 @@ login.addEventListener("click" , (event) => {
     msg.innerHTML = "Login Successfully !" ;
     msg.style.color = "green" ;
     msg.style.fontWeight = "bold" ;
+    localStorage.setItem("userName" , userName.value);
     gotoIndex() ;
 
   })

@@ -20,6 +20,7 @@ signUp.addEventListener("click" , (event) => {
     msg.innerHTML = " User Added Successfully ! " ;
     msg.style.color = "green";
     msg.style.fontWeight = "bold" ;
+    localStorage.setItem("userName" , userName.value);
     gotoIndex();
   })
   .catch((error) => {
