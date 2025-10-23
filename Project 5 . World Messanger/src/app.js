@@ -7,30 +7,45 @@ const db = firebase.firestore();
 
 
 button.addEventListener("click" , () => {
-            addInDom()
-
-    // if(!userMessage.value) {
-    //     printer.innerHTML = "Input Field Is Empty !" ;
-    //     printer.style.fontWeight = "bold" ;
-    //     printer.style.fontFamily = "poppins";
-    //     printer.style.color = "red" ;
-    // }
-    // db.collection("messages").add({
-    //     UserName : localStorage.getItem("userName"),
-    //     UserMessage : userMessage.value ,
-    // })
-    // .then((docRef) => {
-    //     addInDom()
-    //     console.log("Document written with ID: ", docRef.id);
-    // })
-    // .catch((error) => {
-    //     console.error("Error adding document: ", error);
-    // });    
+    if(!userMessage.value) {
+        printer.innerHTML = "Input Field Is Empty !" ;
+        printer.style.fontWeight = "bold" ;
+        printer.style.fontFamily = "poppins";
+        printer.style.color = "red" ;
+        return ;
+    }
+    db.collection("messages").add({
+        UserName : localStorage.getItem("userName"),
+        UserMessage : userMessage.value ,
+    })
+    .then((docRef) => {
+        addInDom(docRef)
+        console.log("Document written with ID: ", docRef.id);
+    })
+    .catch((error) => {
+        console.error("Error adding document: ", error);
+    });    
 });
 
 
 
-function addInDom () {
+  function refresh () {
+    db.collection("messages").onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === "added") {
+            addInDom(change.doc);
+          }
+          if (change.type === "modified") {
+          }
+          if (change.type === "removed") {
+            deleteInDom(change.doc)
+            }
+        });
+      });
+  }
+
+
+function addInDom (docRef) {
     let taskList = document.createElement("li");
     let userMessageSec = document.createElement("p");
     let msgSpan = document.createElement("span")
@@ -46,6 +61,8 @@ function addInDom () {
 
     userMessageSec.textContent = userMessage.value;
     userNameSec.textContent = localStorage.getItem("userName");
+    deleteButton.setAttribute("onClick" , "deleteData(this)");
+    deleteButton.setAttribute("id" , docRef.id)
     deleteButton.textContent = "🗑️" ;
     deleteButton.style.width = "80px" ;
 
@@ -55,17 +72,24 @@ function addInDom () {
 
     ulEl.appendChild(taskList);
 
-    console.log(userNameSec)
-    console.log(userMessageSec);
-    console.log(deleteButton)
+}
 
+function deleteData (button) {
+    console.log(button.id)
+    db.collection("messages").doc().delete(button.id).then(() => {
+    console.log("Document successfully deleted!");
+    deleteInDom(button);
+    }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+};
 
-    deleteButton.addEventListener("click" , () {
-
-    })
-
+function deleteInDom (button) {
+    let removal = button.parentElement.parentElement;
+    removal.removeChild(button.parentElement)
 
 }
+
 
 
 
