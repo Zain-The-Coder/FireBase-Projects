@@ -19,7 +19,6 @@ button.addEventListener("click" , () => {
         UserMessage : userMessage.value ,
     })
     .then((docRef) => {
-        addInDom(docRef)
         console.log("Document written with ID: ", docRef.id);
     })
     .catch((error) => {
@@ -35,17 +34,18 @@ button.addEventListener("click" , () => {
           if (change.type === "added") {
             addInDom(change.doc);
           }
-          if (change.type === "modified") {
-          }
+//           if (change.type === "modified") {
+//           }
           if (change.type === "removed") {
-            deleteInDom(change.doc)
+            deleteFromDom(change.doc);
             }
-        });
+      });
       });
   }
 
-
+let deleteId = "" ;
 function addInDom (docRef) {
+    let userTaskEntered = docRef.data();
     let taskList = document.createElement("li");
     let userMessageSec = document.createElement("p");
     let msgSpan = document.createElement("span")
@@ -59,12 +59,13 @@ function addInDom (docRef) {
     userNameSec.appendChild(nameSpan);
     userMessageSec.appendChild(msgSpan);
 
-    userMessageSec.textContent = userMessage.value;
+    userMessageSec.textContent = userTaskEntered.UserMessage;
     userNameSec.textContent = localStorage.getItem("userName");
     deleteButton.setAttribute("onClick" , "deleteData(this)");
     deleteButton.setAttribute("id" , docRef.id)
     deleteButton.textContent = "🗑️" ;
     deleteButton.style.width = "80px" ;
+    deleteId += docRef.id;
 
     taskList.appendChild(userNameSec);
     taskList.appendChild(userMessageSec);
@@ -74,22 +75,21 @@ function addInDom (docRef) {
 
 }
 
-function deleteData (button) {
-    console.log(button.id)
-    db.collection("messages").doc().delete(button.id).then(() => {
+function deleteData (deleteButton) {
+    console.log(deleteButton)
+    let idOfUser = deleteButton.id ;
+    db.collection("messages").doc(idOfUser)
+    .delete()
+    .then(() => {
     console.log("Document successfully deleted!");
-    deleteInDom(button);
-    }).catch((error) => {
-        console.error("Error removing document: ", error);
-    });
-};
-
-function deleteInDom (button) {
-    let removal = button.parentElement.parentElement;
-    removal.removeChild(button.parentElement)
-
+}).catch((error) => {
+    console.error("Error removing document: ", error);
+});
 }
 
+function deleteFromDom (unreadableObject) {
+    let removed = document.getElementById(unreadableObject.id);
+    let unorderedList = removed.parentElement.parentElement;
+    unorderedList.removeChild(removed.parentElement)
 
-
-
+}
