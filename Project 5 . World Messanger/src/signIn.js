@@ -27,6 +27,7 @@ login.addEventListener("click" , (event) => {
     msg.style.color = "green" ;
     msg.style.fontWeight = "bold" ;
     localStorage.setItem("userName" , userName.value);
+    localStorage.setItem("userUid" , user.uid)
     gotoIndex() ;
 
   })

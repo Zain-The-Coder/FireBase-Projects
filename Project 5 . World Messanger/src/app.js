@@ -17,6 +17,7 @@ button.addEventListener("click" , () => {
     db.collection("messages").add({
         UserName : localStorage.getItem("userName"),
         UserMessage : userMessage.value ,
+        UserUid : localStorage.getItem("userUid"),
     })
     .then((docRef) => {
         console.log("Document written with ID: ", docRef.id);
@@ -48,28 +49,26 @@ function addInDom (docRef) {
     let userTaskEntered = docRef.data();
     let taskList = document.createElement("li");
     let userMessageSec = document.createElement("p");
-    let msgSpan = document.createElement("span")
-    let nameSpan = document.createElement("span")
     let userNameSec = document.createElement("p");
     let deleteButton = document.createElement("button");
 
-    msgSpan.textContent = "USER MESSAGE : " ;
-    nameSpan.textContent = "USER NAME : " ;
-
-    userNameSec.appendChild(nameSpan);
-    userMessageSec.appendChild(msgSpan);
-
+    
     userMessageSec.textContent = userTaskEntered.UserMessage;
-    userNameSec.textContent = localStorage.getItem("userName");
+    userNameSec.textContent = userTaskEntered.UserName;
     deleteButton.setAttribute("onClick" , "deleteData(this)");
     deleteButton.setAttribute("id" , docRef.id)
     deleteButton.textContent = "🗑️" ;
     deleteButton.style.width = "80px" ;
     deleteId += docRef.id;
-
+    
     taskList.appendChild(userNameSec);
     taskList.appendChild(userMessageSec);
     taskList.appendChild(deleteButton);
+
+    if(userTaskEntered.UserUid !== localStorage.getItem("userUid")) {
+        deleteButton.style.display = "none" ;
+    }
+
 
     ulEl.appendChild(taskList);
 
@@ -81,7 +80,10 @@ function deleteData (deleteButton) {
     db.collection("messages").doc(idOfUser)
     .delete()
     .then(() => {
+        let messageData =  doc.data();
+        if(messageData.userUid === localStorage.getItem("userUid")){
     console.log("Document successfully deleted!");
+        }
 }).catch((error) => {
     console.error("Error removing document: ", error);
 });

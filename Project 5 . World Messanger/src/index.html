@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up Page</title>
     <link rel="stylesheet" href="./output.css">
+    <link rel="stylesheet" href="signup.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
 </head>
+<body class="bg-gradient-to-br from-purple-500 to-indigo-600 min-h-screen flex items-center justify-center">
 
-<body onload="refresh()" class="animated-bg text-white font-[Poppins] min-h-screen px-4">
-  
-  <h1 class="text-[42px] font-extrabold text-center mb-8 drop-shadow-[0_0_10px_#9333ea] ">
-    🌍 World Messenger
-  </h1>
-    
-    <div class="w-fit m-auto">
-      <input id="userInput" type="text" placeholder="Type your message..."
-        class="flex-row justify-center text-center m-auto px-4 py-3 rounded-xl bg-[#1f2937] text-white placeholder-gray-400 border border-purple-600/40 focus:ring-2 focus:ring-purple-500 outline-none transition">
-      
-      <button id="submit" class="px-6 py-3 cursor-pointer bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl font-semibold hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 shadow-md">Send</button>
-      <p id="printer" class="text-center"></p>
-    </div>
+  <div id="div" class="bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl p-8 w-[90%] max-w-md">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Create Account ✨</h2>
+    <p class="text-center text-gray-500 mb-8">Join us and start your journey today!</p>
 
+    <form class="space-y-5">
 
-  <section id="msg-sec" class="flex flex-col gap-2 mt-[30px]" >
-    <ul id="ulEl" class="w-[70%] message-list">
-      
-    </ul>
+        <div>
+        <label class="block text-gray-700 mb-2 font-medium">Full Name</label>
+        <input id="user-name" type="text" placeholder="Enter your name" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 outline-none">
+      </div>
 
-  </section>
-  <a href="./signIn.html">signin</a>
+      <div>
+        <label class="block text-gray-700 mb-2 font-medium">Email Address</label>
+        <input id="user-email" type="email" placeholder="Enter your email" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 outline-none">
+      </div>
 
+      <div>
+        <label class="block text-gray-700 mb-2 font-medium">Password</label>
+        <input id="user-password" type="password" placeholder="Create a password" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 outline-none">
+      </div>
+      <p id="message" class="text-center font-[poppins] mb-[-3px] mt-[-8px]"></p>
+      <button id="signup-button" class="w-full cursor-pointer bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-700 transition-all">Sign Up</button>
+    </form>
+
+    <p class="text-center text-gray-600 mt-6">Already have an account?
+      <a href="signIn.html" class="text-purple-600 font-semibold hover:underline">Login</a>
+    </p>
+  </div>
 
 
     <script src="https://www.gstatic.com/firebasejs/12.4.0/firebase-app-compat.js"></script>
@@ -40,11 +46,17 @@
 
     <script>
   const firebaseConfig = {
-//MY API KEY
-   };
+   apiKey: "AIzaSyDsHErsoa1z65NXBYpB-C5g0_4YnmqjsVU",
+    authDomain: "project-no-5-84c1e.firebaseapp.com",
+    projectId: "project-no-5-84c1e",
+    storageBucket: "project-no-5-84c1e.firebasestorage.app",
+    messagingSenderId: "598740783329",
+    appId: "1:598740783329:web:bf57c441a4ca3d3c83a7a0",
+    measurementId: "G-SC9WYFBHMQ"
+  };
 
   firebase.initializeApp(firebaseConfig);
 </script>
-<script src="app.js"></script>
+<script src="signup.js"></script>
 </body>
 </html>

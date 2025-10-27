@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./output.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="refresh()" class="animated-bg text-white font-[Poppins] min-h-screen px-4">
+  
+  <h1 class="text-[42px] font-extrabold text-center mb-8 drop-shadow-[0_0_10px_#9333ea] ">
+    🌍 World Messenger
+  </h1>
+    
+    <div class="w-fit m-auto">
+      <input id="userInput" type="text" placeholder="Type your message..."
+        class="flex-row justify-center text-center m-auto px-4 py-3 rounded-xl bg-[#1f2937] text-white placeholder-gray-400 border border-purple-600/40 focus:ring-2 focus:ring-purple-500 outline-none transition">
+      
+      <button id="submit" class="px-6 py-3 cursor-pointer bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl font-semibold hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 shadow-md">Send</button>
+      <p id="printer" class="text-center"></p>
+    </div>
+
+
+  <section id="msg-sec" class="flex flex-col gap-2 mt-[30px]" >
+    <ul id="ulEl" class="w-[70%] message-list">
+      
+    </ul>
+
+  </section>
+  
+  <a href="./signIn.html">signin</a>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/12.4.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.4.0/firebase-auth-compat.js"></script>
+
+    <script>
+  const firebaseConfig = {
+   apiKey: "AIzaSyDsHErsoa1z65NXBYpB-C5g0_4YnmqjsVU",
+    authDomain: "project-no-5-84c1e.firebaseapp.com",
+    projectId: "project-no-5-84c1e",
+    storageBucket: "project-no-5-84c1e.firebasestorage.app",
+    messagingSenderId: "598740783329",
+    appId: "1:598740783329:web:bf57c441a4ca3d3c83a7a0",
+    measurementId: "G-SC9WYFBHMQ"   };
+
+  firebase.initializeApp(firebaseConfig);
+</script>
+<script src="app.js"></script>
+</body>
+</html>
