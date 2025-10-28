@@ -35,5 +35,5 @@ signUp.addEventListener("click" , (event) => {
 
 
 function gotoIndex () {
-  window.location.href = "./index.html" ;
+  window.location.href = "./home.html" ;
 }
