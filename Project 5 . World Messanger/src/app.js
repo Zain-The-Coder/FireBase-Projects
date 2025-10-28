@@ -21,6 +21,10 @@ button.addEventListener("click" , () => {
     })
     .then((docRef) => {
         console.log("Document written with ID: ", docRef.id);
+        printer.innerHTML = "Message Is Added !";
+        printer.style.color = "green" ;
+        printer.style.fontFamily = "poppins";
+        userMessage.value = "";
     })
     .catch((error) => {
         console.error("Error adding document: ", error);
@@ -57,8 +61,11 @@ function addInDom (docRef) {
     userNameSec.textContent = userTaskEntered.UserName;
     deleteButton.setAttribute("onClick" , "deleteData(this)");
     deleteButton.setAttribute("id" , docRef.id)
-    deleteButton.textContent = "🗑️" ;
-    deleteButton.style.width = "80px" ;
+    deleteButton.textContent = "🗑️ Delete Message" ;
+    deleteButton.style.color = 'red';
+    deleteButton.style.width = "150px" ;
+    deleteButton.style.height = "40px";
+    deleteButton.style.backgroundColor = "transparent";
     deleteId += docRef.id;
     
     taskList.appendChild(userNameSec);
@@ -75,13 +82,10 @@ function addInDom (docRef) {
 }
 
 function deleteData (deleteButton) {
-    console.log(deleteButton)
     let idOfUser = deleteButton.id ;
     db.collection("messages").doc(idOfUser)
     .delete()
-    .then(() => {
-        let messageData =  doc.data();
-        if(messageData.userUid === localStorage.getItem("userUid")){
+    .then(() => {{
     console.log("Document successfully deleted!");
         }
 }).catch((error) => {

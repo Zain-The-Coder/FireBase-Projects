@@ -76,3 +76,29 @@
       background-size: 300% 300%;
       animation: gradientMove 10s ease infinite;
     }
+
+    @media(max-width:525px) {
+      h1{
+        font-size: 30px;
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width:400px) {
+      h1 {
+        font-size: 25px;
+        margin-top: 10px;
+      }
+      #userInput {
+        font-size: 14px;
+      }
+      #submit {
+        font-size: 12px;
+        height: 40px;
+        width: 40px;
+        padding: 0px;
+      }
+      #ulEl {
+        font-size: 14px;
+      }
+    }
